@@ -1,208 +1,205 @@
-/* --- Paleta de Colores y Estilos Base --- */
+/* --- Paleta de Colores y Variables --- */
 :root {
-  /* 🌸 MODO CLARO – Rosado elegante con texto azul */
-  --color-fondo: #FFF7FA;
-  --color-semestre-bg: #FFFFFF;
-  --color-texto: #2A3C5A;
-  --color-borde-suave: #F2EBED;
+    /* 🌸 MODO CLARO */
+    --color-bg: #FFFBF7;
+    --color-text: #3E3C56;
+    --color-header: #FFFFFF;
+    --color-primary-accent: #FFC0CB; /* Rosa Pastel */
+    --color-secondary-accent: #F9D5A7; /* Durazno Suave */
+    --color-progress-bar: linear-gradient(90deg, #F9D5A7, #FFC0CB);
+    
+    /* Colores por estado */
+    --color-pendiente: #F1F1F1;
+    --color-pendiente-text: #888;
+    --color-en-curso: #AEEEEE; /* Turquesa Pastel */
+    --color-en-curso-text: #2A5D5D;
+    --color-cursado: #D8BFD8; /* Lavanda Suave (alternativa a lila) */
+    --color-cursado-text: #5A485A;
+    --color-shadow: rgba(188, 172, 196, 0.2);
 
-  /* Colores para Asignaturas */
-  --color-fundacion: #E57399;   /* Bubblegum Pink */
-  --color-disciplinar: #F6AEBB; /* Rosado Principal */
-  --color-libre: #FDDDE1;       /* Rosado Claro */
-  --color-trabajo: #2A3C5A;      /* Azul Contraste */
-  
-  --color-texto-claro: #FFFFFF;
-  --color-texto-oscuro: #2A3C5A;
-
-  --color-aprobado: #50C878;     /* Verde Malaquita (combina bien) */
-  --color-bloqueado: #EAE0E3;
+    /* Tipografía */
+    --font-titles: 'Poppins', sans-serif;
+    --font-text: 'Poppins', sans-serif;
 }
 
 [data-theme="dark"] {
-  /* 🌙 MODO OSCURO – Azul violeta cálido con rosado blush */
-  --color-fondo: #241F2E;
-  --color-semestre-bg: #3A2F46;
-  --color-texto: #FDF9F8;
-  --color-borde-suave: #3A2F46;
+    /* 🌙 MODO OSCURO */
+    --color-bg: #2B2A33;
+    --color-text: #EAE6FF;
+    --color-header: #3E3C56;
+    --color-primary-accent: #E59A9A; /* Rosa Blush Oscuro */
+    --color-secondary-accent: #E3B583;
+    
+    /* Colores por estado */
+    --color-pendiente: #4A485D;
+    --color-pendiente-text: #999;
+    --color-en-curso: #61A0A0;
+    --color-en-curso-text: #EAE6FF;
+    --color-cursado: #7D6B7D;
+    --color-cursado-text: #EAE6FF;
+    --color-shadow: rgba(0, 0, 0, 0.2);
+}
 
-  /* Colores para Asignaturas */
-  --color-fundacion: #E59A9A;   /* Rosado Blush */
-  --color-disciplinar: #F1B2B2; /* Rosado Claro (Hover) */
-  --color-libre: #3A2F46;       /* Fondo oscuro con borde */
-  --color-trabajo: #E59A9A;      /* Rosado Blush */
+/* --- Estilos Generales y Animaciones --- */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-  --color-texto-claro: #FDF9F8;
-  --color-texto-oscuro: #2A3C5A; /* Se mantiene por si se necesita */
-
-  --color-aprobado: #50C878;
-  --color-bloqueado: #4A4557;
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 body {
-  font-family: 'Poppins', sans-serif; /* Nueva fuente */
-  background-color: var(--color-fondo);
-  color: var(--color-texto);
-  margin: 0;
-  padding: 20px;
-  text-align: center;
-  transition: background-color 0.3s, color 0.3s;
+    font-family: var(--font-text);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    transition: background-color 0.4s, color 0.4s;
 }
 
-h1 {
-  margin-top: 0;
-  font-size: 2.2em;
-  font-weight: 700;
+/* --- Encabezado y Barra de Progreso --- */
+header {
+    background-color: var(--color-header);
+    padding: 2rem 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 20px var(--color-shadow);
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    position: relative;
+    z-index: 10;
+    transition: background-color 0.4s;
 }
 
-#malla-container {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  padding: 20px;
-  gap: 20px;
-  justify-content: flex-start;
+header h1 {
+    font-family: var(--font-titles);
+    font-weight: 700; /* Bold */
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    margin-bottom: 1.5rem;
+}
+
+#progress-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto 1rem;
+    background-color: var(--color-pendiente);
+    border-radius: 50px;
+    height: 1.5rem;
+    padding: 4px;
+}
+
+#progress-bar {
+    width: 0%; /* Controlado por JS */
+    height: 100%;
+    background: var(--color-progress-bar);
+    border-radius: 50px;
+    position: relative;
+    transition: width 1s ease-in-out;
+}
+
+#progress-character {
+    position: absolute;
+    right: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.8rem;
+    transition: right 1s ease-in-out;
+}
+
+#motivational-phrase {
+    font-family: var(--font-titles);
+    font-weight: 600; /* SemiBold */
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    min-height: 1.5em; /* Evita saltos de layout */
+}
+
+/* --- Malla Curricular --- */
+main {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 2.5rem;
+    gap: 1.5rem;
 }
 
 .semestre {
-  background-color: var(--color-semestre-bg);
-  border: 1px solid var(--color-borde-suave);
-  border-radius: 24px; /* Más orgánico */
-  padding: 15px;
-  min-width: 250px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  flex-shrink: 0;
-  transition: background-color 0.3s, border-color 0.3s;
+    flex: 0 0 300px;
+    padding: 1rem;
+    animation: fadeIn 0.8s ease-out forwards;
 }
 
 .semestre h2 {
-  margin-top: 0;
-  font-size: 1.6em;
-  font-weight: 600;
-  color: var(--color-texto);
+    font-family: var(--font-titles);
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
 }
 
 .ramo {
-  border-radius: 25px; /* ¡Súper orgánico! */
-  padding: 15px;
-  margin: 12px 0;
-  font-weight: 600;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s;
-  cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
-  border: none;
-  text-align: left;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px var(--color-shadow);
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s, background-color 0.4s;
+    position: relative;
 }
 
-.ramo:not(.bloqueado):hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+.ramo:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px var(--color-shadow);
 }
 
-.ramo span {
-  font-size: 0.85em;
-  font-weight: 400;
-  opacity: 0.9;
-  display: block;
-  margin-top: 4px;
+.ramo-info {
+    font-weight: 400; /* Regular */
+    font-size: 0.85rem;
+    opacity: 0.7;
+    margin-top: 0.5rem;
+    display: block;
 }
 
-/* --- Tipos de ramos con colores de la paleta --- */
-.fundacion { background-color: var(--color-fundacion); color: var(--color-texto-claro); }
-.disciplinar { background-color: var(--color-disciplinar); color: var(--color-texto-oscuro); }
-.libre { background-color: var(--color-libre); color: var(--color-texto-oscuro); }
-[data-theme="dark"] .libre { border: 2px solid var(--color-disciplinar); color: var(--color-texto-claro);}
-.trabajo { background-color: var(--color-trabajo); color: var(--color-texto-claro); }
+/* Colores de Tarjetas por Estado */
+.ramo.pendiente { background-color: var(--color-pendiente); color: var(--color-pendiente-text); }
+.ramo.en-curso { background-color: var(--color-en-curso); color: var(--color-en-curso-text); }
+.ramo.cursado { background-color: var(--color-cursado); color: var(--color-cursado-text); text-decoration: line-through; }
 
-.bloqueado {
-  background-color: var(--color-bloqueado) !important;
-  color: #999;
-  cursor: not-allowed;
-  box-shadow: none;
-}
-[data-theme="dark"] .bloqueado { color: #777; }
-
-.aprobado {
-  background-color: var(--color-aprobado) !important;
-  color: var(--color-texto-claro) !important;
-  text-decoration: line-through;
-  opacity: 0.9;
+/* --- Pie de Página --- */
+footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.9rem;
+    opacity: 0.7;
 }
 
-/* --- Footer y Botón --- */
-#footer { margin: 30px 20px; }
-
-#botonReiniciar {
-  padding: 12px 25px;
-  font-size: 1em;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-  background-color: var(--color-fundacion);
-  border: none;
-  border-radius: 16px; /* Orgánico */
-  color: var(--color-texto-claro);
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
-}
-
-#botonReiniciar:hover {
-  background-color: var(--color-disciplinar);
-  color: var(--color-texto-oscuro);
-  transform: scale(1.05);
-}
-
-#avance {
-  margin-top: 20px;
-  font-weight: 600;
-  font-size: 1.1em;
-}
-
-/* --- Estilos para el Interruptor de Tema --- */
+/* --- Botón de Tema --- */
 .theme-switcher-wrapper {
-  margin-bottom: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
 }
-.theme-switcher {
-  position: relative;
-  display: inline-block;
-  width: 70px;
-  height: 34px;
-}
+/* (Incluir aquí los estilos del .theme-switcher y .slider del CSS anterior) */
+.theme-switcher { position: relative; display: inline-block; width: 60px; height: 34px; }
 .theme-switcher input { display: none; }
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-color: var(--color-trabajo);
-  transition: 0.4s;
-}
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; }
 .slider.round { border-radius: 34px; }
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  transition: 0.4s;
-  border-radius: 50%;
-}
-input:checked + .slider { background-color: var(--color-semestre-bg); border: 1px solid var(--color-fundacion);}
-input:checked + .slider:before { transform: translateX(36px); }
+.slider:before { position: absolute; content: ""; height: 26px; width: 26px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
+input:checked + .slider { background-color: var(--color-primary-accent); }
+input:checked + .slider:before { transform: translateX(26px); }
 
-/* Iconos del toggle */
-.slider .icon {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 16px;
-  opacity: 0;
-  transition: opacity 0.4s;
+
+/* --- Responsividad --- */
+@media (max-width: 768px) {
+    main {
+        padding: 1.5rem;
+        gap: 1rem;
+    }
+    .semestre {
+        flex: 0 0 250px;
+    }
+    header h1 {
+        font-size: 1.8rem;
+    }
 }
-.slider .light-icon { left: 8px; }
-.slider .dark-icon { right: 8px; }
-input:not(:checked) ~ .slider .dark-icon,
-input:checked ~ .slider .light-icon { opacity: 1; }
