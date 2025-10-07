@@ -1,40 +1,43 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Malla Curricular - Ingeniería Industrial</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  
-  <link rel="stylesheet" href="estilos.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malla Curricular - Laura Rojas</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
 
-  <h1>Malla Curricular - Ingeniería Industrial</h1>
+    <header>
+        <div class="theme-switcher-wrapper">
+            <label class="theme-switcher" for="theme-toggle">
+                <input type="checkbox" id="theme-toggle" />
+                <div class="slider round"></div>
+            </label>
+        </div>
+        
+        <h1>Transformando ideas en acción 💡✨</h1>
+        
+        <div id="progress-container">
+            <div id="progress-bar">
+                <div id="progress-character">🏃‍♀️</div>
+            </div>
+        </div>
 
-  <div class="theme-switcher-wrapper">
-    <label class="theme-switcher" for="theme-toggle">
-      <input type="checkbox" id="theme-toggle" />
-      <div class="slider round">
-        <span class="icon light-icon">☀️</span>
-        <span class="icon dark-icon">🌙</span>
-      </div>
-    </label>
-  </div>
+        <p id="motivational-phrase">¡Empezando con toda 💪!</p>
+    </header>
 
-  <div id="malla-container"></div>
+    <main id="malla-container"></main>
 
-  <div id="footer">
-    <button id="botonReiniciar">Reiniciar progreso</button>
-    <div id="avance">
-      Créditos completados: <span id="creditosCompletados">0</span> / 168
-      (<span id="porcentajeAvance">0.00</span>%)
-    </div>
-  </div>
+    <footer>
+        <p>Desarrollado con 💖 por Laura Rojas</p>
+    </footer>
 
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
